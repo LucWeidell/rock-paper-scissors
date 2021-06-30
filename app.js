@@ -1,20 +1,24 @@
-window.ListeningStateChangedEvent();
+window.addEventListener('click', ()=> {console.log('clicked')})
 
+let score = [0, 0];
 let handChoice =(
 {
   hand: 'rock',
   btnClass: 'btn-bg-secondary',
-  img: '/assets/rock.jpg'
+  img: '/assets/rock.jpg',
+  wins: 'scissors'
 },
 {
   hand: 'paper',
   btnClass: 'btn-bg-light',
-  img: '/assets/paper.jpg'
+  img: '/assets/paper.jpg',
+  wins: 'rock'
 },
 {
   hand: 'scissors',
   btnClass: 'btn-bg-success',
-  img: '/assets/scissors.jpg'
+  img: '/assets/scissors.jpg',
+  wins: 'paper'
 })
 
 function drawHands(){
@@ -22,12 +26,12 @@ function drawHands(){
   //NOTE for:  In loop iterates THROUGH and object keys
   // Object.key(animals) gives array of keys = ['cow', duck' .....]
   for(let key in handChoice){
-    let handObj = animals[key]
+    let handObj = handChoice[key]
     // make sure single quotes around key in onclick because cow is not 'cow'
-    template += `<button class = "btn ${handObj.btnClass}" onClick= "speak('${key}')">${key}</button>`
+    template += `<button class = "btn ${handObj.btnClass}" onClick= "play('${key}')">${key}</button>`
 
   }
-  document.getElementById('buttons').innerHTML = template + `<button class="btn btn-dark mx-1" onclick="play(">
+  document.getElementById('buttons').innerHTML = template + `<button class="btn btn-dark mx-1" onclick="play(compHand())">
   Computer chooses. </button>`
 }
 
@@ -57,11 +61,20 @@ function play(userChoice){
   //Now Fight:
 
   //Who won:
+  //If tie: draw and end play
+  if(p1==comp){
+    drawTie();
+    break;
+  }
   if(isHumWin(p1, comp)){
-    drawHumanWin()
+    drawHumanWin();
+    updateScore(true);
+
   } else {
     drawCompWin()
+    updateScore(false)
   }
+  updateScore();
 }
 
 /**
@@ -94,8 +107,13 @@ function fight(human, computer){
  * @returns {boolean} true if human wins, false otherwise
  */
 function isHumWin(human, computer){
-  let result = false;
-
+  humWinCondit = human.wins;
+  switch(computer.hand){
+    case drawHumanWin:
+      return true;
+    case human.hand:
+      return false;
+  }
   return result;
 }
 
@@ -103,7 +121,8 @@ function isHumWin(human, computer){
  * This function draws the victory for human
  */
 function drawHumanWin(){
-
+  document.getElementById('winner').innerHTML =
+  `<img class= "w-75" src="${humanWin.img}" id ="animal-pic" alt="humanWin">`
 }
 
 /**
@@ -112,3 +131,25 @@ function drawHumanWin(){
 function drawCompWin(){
 
 }
+
+/**
+ * Updates the score variable depending on who won
+ *
+ * @param {Boolean} flag True if player wins, false computer won
+ */
+function updateScore(flag){
+  if(updateScore){
+    score=[(score[0]+1), score[1]];
+  } else {
+    score= [score[0], (score[1]+1)];
+  }
+}
+
+/**
+ * Draws the new score on the nav bar
+ */
+function drawScore(){
+  document.getElementById('score').innerText = `Human vs Computer: ${score[0]} to ${score[1]}!`
+}
+
+drawHands();
