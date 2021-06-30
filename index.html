@@ -15,21 +15,60 @@
   <!-- header -->
   <header>
     <div class="row">
-      <div class="col"></div>
+      <div class="col p-0">
+        <!-- NOTE b4-navbar-default -->
+        <nav class="navbar navbar-expand-sm navbar-light bg-light">
+          <a class="navbar-brand py-0" href="#">Rock-Paper-Scissors Trainer</a>
+          <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+              aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <!-- deleted active -->
+              <li class="nav-item">
+                <a class="nav-link px-1" href="#human-hands">Hands <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link px-1" href="#winner">Result <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <p id = "score" class="px-1 py-2 m-0">Human vs Computer: 0 to 0!</p>
+              </li>
+              <!-- deted the rest -->
+            </ul>
+          </div>
+        </nav>
+      </div>
     </div>
   </header>
 
   <main>
     <div class="row">
-      <div class="col" id="hands"></div>
-      <div class="col" id="battle"></div>
-      <div class="col" id="Winner"></div>
+      <div class="col-sm-12 col-md-8" id="human-hands">
+
+      </div>
+      <div class="col-sm-12 col-md-4" id="comp-hands">
+      </div>
+    </div>
+    <div class="row" id ="battle">
+      <div class="col-md-6" id="human-fin-hand">
+      </div>
+      <div class="col" id="comp-fin-hand"">
+      </div>
+    </div>
+    <div class="row" id ="winner">
+      <div class="div"></div>
     </div>
   </main>
+  <!-- Footer -->
+  <footer>
+    <div class="row">
+      <div class="col">
 
-
-
-
-  <script>app.js</script>
+      </div>
+    </div>
+  </footer>
+  <script src="app.js"></script>
 </body>
 </html>
